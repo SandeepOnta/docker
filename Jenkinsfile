@@ -11,6 +11,12 @@ pipeline {
 	    steps {
 		sh 'docker run -d -p 4004:80 friendlyhello'
 		}
-	  }
+	}
+	    stage('Run Docker Stack Deploy') {
+		    steps {
+			sh 'docker swarm init'
+			sh 'docker stack deploy -c docker-compose.yml getstartedlab'
+		    }
+	    }
     }
 }
